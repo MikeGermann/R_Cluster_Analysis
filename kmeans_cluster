@@ -1,0 +1,32 @@
+# the following is a k-means clustering of three random players on a pitch in R
+
+# import graphing functions
+library(ggplot2)
+# import data.frame functions
+library(dplyr)
+
+# build player matrix
+player1 <- c(x=5, y=12)
+player2 <- c(x=3, y=1)
+player3 <- c(x=9, y=4)
+players <- rbind(player1, player2, player3)
+players
+
+# convert player matrix to data.frame
+players_df <- data.frame(players)
+
+# perform k-means clustering
+model_km2 <- kmeans(players_df, centers=2)
+model_km2
+
+# extract cluster from k-means matrix
+clusters <- model_km2$cluster
+clusters
+
+# add cluster data to player data.frame
+players_clustered <- mutate(players_df, cluster=clusters)
+players_clustered
+
+# graph player position and cluster (by color)
+ggplot(players_clustered, aes(x=x, y=y, color=factor(cluster))) +
+  geom_point()
