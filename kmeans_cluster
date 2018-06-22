@@ -5,7 +5,7 @@ library(ggplot2)
 # import data.frame functions
 library(dplyr)
 
-# build player matrix
+# player position matrix
 player1 <- c(x=5, y=12)
 player2 <- c(x=3, y=1)
 player3 <- c(x=9, y=4)
@@ -16,7 +16,7 @@ players
 players_df <- data.frame(players)
 
 # perform k-means clustering
-model_km2 <- kmeans(players_df, centers=2)
+model_km2 <- kmeans(players_df, centers=2) # centers=2 because 2 teams
 model_km2
 
 # extract cluster from k-means matrix
@@ -30,3 +30,6 @@ players_clustered
 # graph player position and cluster (by color)
 ggplot(players_clustered, aes(x=x, y=y, color=factor(cluster))) +
   geom_point()
+
+# an elbow graph can help determine the number of centers (clusters)
+
